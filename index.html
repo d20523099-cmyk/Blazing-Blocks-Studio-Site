@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blazing Blocks Studio</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --accent: #ff6a00;
+            --accent-bright: #ff8c38;
+            --text-bright: #ffffff;
+            --glass: rgba(20, 20, 20, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-bright);
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1008 100%);
+            background-attachment: fixed;
+        }
+
+        /* ====== МЯГКИЙ ЗОЛОТИСТЫЙ ЛОГОТИП ====== */
+        .logo {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, #ffffff 0%, #ffaa00 40%, #ff6a00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 8px rgba(255, 106, 0, 0.7));
+            animation: softGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes softGlow {
+            0% {
+                filter: drop-shadow(0 0 5px rgba(255, 106, 0, 0.5));
+            }
+            100% {
+                filter: drop-shadow(0 0 12px rgba(255, 106, 0, 0.8));
+            }
+        }
+        /* =========================================== */
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8a8a8a;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .btn {
+            background: var(--glass);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 106, 0, 0.3);
+            color: var(--text-bright);
+            padding: 16px 30px;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 0 10px rgba(255, 106, 0, 0.1);
+        }
+
+        .btn:hover {
+            background: rgba(255, 106, 0, 0.15);
+            border-color: var(--accent);
+            box-shadow: 0 0 25px rgba(255, 106, 0, 0.6);
+            transform: translateY(-3px);
+            color: #fff;
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+        }
+
+        .btn span {
+            font-size: 1.6rem;
+        }
+
+        .footer {
+            margin-top: 50px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 100%; max-width: 500px;">
+        <!-- Логотип -->
+        <div class="logo">BLAZING<br>BLOCKS</div>
+        <p class="subtitle">Инди-студия одного разработчика. Огонь в каждом пикселе.</p>
+
+        <!-- Кнопки-переходники -->
+        <div class="links">
+            <a href="https://t.me/BlazingBlocksStudio" target="_blank" class="btn">
+                <span>📢</span> Telegram канал
+            </a>
+            <a href="https://www.twitch.tv/blaze_ea" target="_blank" class="btn">
+                <span>🎮</span> Twitch
+            </a>
+            <a href="https://blazing-blocks-studio.itch.io/" target="_blank" class="btn">
+                <span>🎯</span> Itch.io
+            </a>
+            <!-- Кнопка TikTok -->
+            <a href="www.tiktok.com/@blazing.blocks.studio" target="_blank" class="btn">
+                <span>🎵</span> TikTok
+            </a>
+            <a href="https://www.roblox.com/share/g/725905566" target="_blank" class="btn">
+                <span>👥</span> Roblox комьюнити
+            </a>
+            <a href="https://www.donationalerts.com/r/blaze_ea" target="_blank" class="btn">
+                <span>💛</span> DonationAlerts
+            </a>
+        </div>
+
+        <!-- Копирайт -->
+        <div class="footer">
+            © 2026 Blazing Blocks Studio. Все права защищены.
+        </div>
+    </div>
+</body>
+</html>
