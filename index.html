@@ -220,10 +220,19 @@
         }
 
         .overlay-content .subtitle-files,
-        .overlay-content .subtitle-games {
+        .overlay-content .subtitle-games,
+        .overlay-content .subtitle-events {
             color: #aaa;
             margin-bottom: 25px;
             font-size: 1rem;
+        }
+
+        .overlay-content .message-placeholder {
+            color: #ccc;
+            font-size: 1.1rem;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         /* Карточки игр */
@@ -276,17 +285,6 @@
         .game-card .game-link a:hover {
             background: var(--accent);
             box-shadow: 0 0 20px rgba(255, 106, 0, 0.4);
-        }
-
-        .back-btn .btn {
-            padding: 12px 25px;
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .back-btn .btn:hover {
-            background: rgba(255, 106, 0, 0.1);
         }
 
         /* Кнопка файлов */
@@ -367,6 +365,9 @@
             <button class="btn" id="openFilesBtn">
                 <span>📁</span> Файлы
             </button>
+            <button class="btn" id="openEventsBtn">
+                <span>📅</span> Ивенты
+            </button>
         </div>
 
         <div class="footer">
@@ -381,11 +382,6 @@
             <h2>🎮 Наши игры</h2>
             <p class="subtitle-games">Проекты, над которыми мы работаем</p>
             <div class="games-list" id="gamesList"></div>
-            <div class="back-btn">
-                <button class="btn close-overlay-btn">
-                    <span>⬆</span> Наверх
-                </button>
-            </div>
         </div>
     </div>
 
@@ -395,15 +391,22 @@
             <button class="overlay-close close-overlay-btn">✕</button>
             <h2>📂 Доступные файлы</h2>
             <p class="subtitle-files">Нажмите на кнопку, чтобы скачать Майнкрафт пак</p>
-            <div style="margin-bottom: 25px;">
+            <div style="margin-bottom: 0;">
                 <button class="file-btn" onclick="alert('⚠️ Файл пока что недоступен. Следите за обновлениями в нашем Telegram-канале!')">
                     <span>⛏️</span> Скачать Майнкрафт пак
                 </button>
             </div>
-            <div class="back-btn">
-                <button class="btn close-overlay-btn">
-                    <span>⬆</span> Наверх
-                </button>
+        </div>
+    </div>
+
+    <!-- Оверлей ИВЕНТЫ -->
+    <div class="overlay" id="eventsOverlay">
+        <div class="overlay-content">
+            <button class="overlay-close close-overlay-btn">✕</button>
+            <h2>📅 Ивенты</h2>
+            <p class="subtitle-events">Ближайшие мероприятия студии</p>
+            <div class="message-placeholder">
+                Пока ивентов нет. Загляните позже!
             </div>
         </div>
     </div>
@@ -451,6 +454,7 @@
 
         document.getElementById('openGamesBtn').addEventListener('click', () => openOverlay('gamesOverlay'));
         document.getElementById('openFilesBtn').addEventListener('click', () => openOverlay('filesOverlay'));
+        document.getElementById('openEventsBtn').addEventListener('click', () => openOverlay('eventsOverlay'));
 
         document.querySelectorAll('.close-overlay-btn').forEach(btn => {
             btn.addEventListener('click', closeAllOverlays);
