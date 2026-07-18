@@ -10,7 +10,7 @@
             --accent: #ff6a00;
             --accent-bright: #ff8c38;
             --text-bright: #ffffff;
-            --glass: rgba(20, 20, 20, 0.8);
+            --glass: rgba(20, 20, 20, 0.85);
         }
 
         * {
@@ -39,7 +39,7 @@
 
         .container {
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;
             position: relative;
             z-index: 1;
             transition: opacity 0.5s ease, transform 0.5s ease;
@@ -60,42 +60,43 @@
         }
 
         .logo {
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: 900;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
             line-height: 1.1;
             text-transform: uppercase;
             background: linear-gradient(180deg, #ffffff 0%, #ffaa00 40%, #ff6a00 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 0 8px rgba(255, 106, 0, 0.7));
+            filter: drop-shadow(0 0 12px rgba(255, 106, 0, 0.7));
             animation: softGlow 2s ease-in-out infinite alternate;
         }
 
         @keyframes softGlow {
             0% {
-                filter: drop-shadow(0 0 5px rgba(255, 106, 0, 0.5));
+                filter: drop-shadow(0 0 8px rgba(255, 106, 0, 0.5));
             }
             100% {
-                filter: drop-shadow(0 0 12px rgba(255, 106, 0, 0.8));
+                filter: drop-shadow(0 0 18px rgba(255, 106, 0, 0.9));
             }
         }
 
         .subtitle {
-            font-size: 1rem;
-            color: #8a8a8a;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
+            font-size: 1.3rem;
+            color: #aaaaaa;
+            margin-bottom: 35px;
+            letter-spacing: 1.5px;
+            font-weight: 300;
         }
 
         /* ===== СЕТКА КНОПОК ===== */
         .links {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            max-width: 600px;
+            gap: 18px;
+            max-width: 680px;
             margin: 0 auto;
             width: 100%;
         }
@@ -104,11 +105,11 @@
             background: var(--glass);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 106, 0, 0.3);
+            border: 1px solid rgba(255, 106, 0, 0.35);
             color: var(--text-bright);
-            padding: 14px 12px;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            padding: 20px 16px;
+            border-radius: 16px;
+            font-size: 1.3rem;
             font-weight: 600;
             letter-spacing: 0.5px;
             text-decoration: none;
@@ -116,19 +117,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            box-shadow: 0 0 10px rgba(255, 106, 0, 0.1);
+            gap: 14px;
+            box-shadow: 0 0 15px rgba(255, 106, 0, 0.1);
             cursor: pointer;
             font-family: inherit;
             width: 100%;
-            min-height: 58px;
+            min-height: 70px;
         }
 
         .btn:hover {
-            background: rgba(255, 106, 0, 0.15);
+            background: rgba(255, 106, 0, 0.2);
             border-color: var(--accent);
-            box-shadow: 0 0 25px rgba(255, 106, 0, 0.6);
-            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(255, 106, 0, 0.6);
+            transform: translateY(-3px);
             color: #fff;
         }
 
@@ -137,13 +138,13 @@
         }
 
         .btn span {
-            font-size: 1.4rem;
+            font-size: 1.8rem;
         }
 
         .footer {
-            margin-top: 30px;
-            color: #555;
-            font-size: 0.8rem;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9rem;
         }
 
         /* ===== ОВЕРЛЕИ ===== */
@@ -153,9 +154,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -175,14 +176,14 @@
             background: var(--glass);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 106, 0, 0.3);
-            padding: 30px 25px 25px;
-            max-width: 480px;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 106, 0, 0.35);
+            padding: 40px 35px 35px;
+            max-width: 520px;
             width: 100%;
             max-height: 80vh;
             overflow-y: auto;
-            box-shadow: 0 0 50px rgba(255, 106, 0, 0.15);
+            box-shadow: 0 0 60px rgba(255, 106, 0, 0.2);
             transform: scale(0.9) translateY(20px);
             transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
             opacity: 0;
@@ -196,12 +197,12 @@
 
         .overlay-close {
             position: absolute;
-            top: 10px;
-            right: 16px;
+            top: 14px;
+            right: 20px;
             background: none;
             border: none;
             color: #aaa;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             cursor: pointer;
             transition: color 0.2s ease, transform 0.2s ease;
             line-height: 1;
@@ -213,8 +214,8 @@
         }
 
         .overlay-content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 6px;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
             background: linear-gradient(90deg, #ffaa00, #ff6a00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -225,60 +226,60 @@
         .overlay-content .subtitle-games,
         .overlay-content .subtitle-events {
             color: #aaa;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
         }
 
         .overlay-content .message-placeholder {
             color: #ccc;
-            font-size: 1rem;
-            padding: 20px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 1.2rem;
+            padding: 25px 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
         /* Карточки игр */
         .games-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
             margin-bottom: 20px;
             text-align: left;
         }
 
         .game-card {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 12px;
-            padding: 14px 16px;
-            border-left: 3px solid #ffaa00;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 14px;
+            padding: 18px 20px;
+            border-left: 4px solid #ffaa00;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
 
         .game-card .game-title {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             font-weight: 600;
             color: #fff;
         }
 
         .game-card .game-engine {
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             color: #aaa;
         }
 
         .game-card .game-link {
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         .game-card .game-link a {
             display: inline-block;
-            background: rgba(255, 106, 0, 0.2);
+            background: rgba(255, 106, 0, 0.25);
             border: 1px solid var(--accent);
             color: #fff;
-            padding: 6px 16px;
-            border-radius: 8px;
-            font-size: 0.85rem;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
             font-weight: 500;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -286,60 +287,59 @@
 
         .game-card .game-link a:hover {
             background: var(--accent);
-            box-shadow: 0 0 20px rgba(255, 106, 0, 0.4);
+            box-shadow: 0 0 25px rgba(255, 106, 0, 0.5);
         }
 
         /* Кнопка файлов */
         .file-btn {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 106, 0, 0.3);
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 106, 0, 0.4);
             color: #fff;
-            padding: 12px 16px;
-            border-radius: 10px;
-            font-size: 1rem;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 1.2rem;
             font-weight: 500;
             text-decoration: none;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 14px;
             cursor: pointer;
             width: 100%;
-            background: rgba(255, 106, 0, 0.05);
+            background: rgba(255, 106, 0, 0.08);
             font-family: inherit;
         }
 
         .file-btn:hover {
-            background: rgba(255, 106, 0, 0.15);
+            background: rgba(255, 106, 0, 0.2);
             border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(255, 106, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 106, 0, 0.4);
             transform: scale(1.02);
         }
 
         .file-btn span {
-            font-size: 1.2rem;
+            font-size: 1.6rem;
         }
 
         .overlay-content::-webkit-scrollbar {
-            width: 4px;
+            width: 5px;
         }
         .overlay-content::-webkit-scrollbar-track {
             background: transparent;
         }
         .overlay-content::-webkit-scrollbar-thumb {
-            background: #555;
+            background: #666;
             border-radius: 10px;
         }
         .overlay-content::-webkit-scrollbar-thumb:hover {
-            background: #888;
+            background: #999;
         }
 
-        /* ===== АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ ===== */
-        @media (max-width: 600px) {
+        /* ===== АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ (но с комфортными размерами) ===== */
+        @media (max-width: 680px) {
             body {
-                padding: 12px;
-                align-items: center;
+                padding: 15px;
             }
 
             .container {
@@ -348,121 +348,102 @@
             }
 
             .logo {
-                font-size: 2.8rem;
-                letter-spacing: 2px;
-                margin-bottom: 6px;
+                font-size: 3.5rem;
+                letter-spacing: 3px;
+                margin-bottom: 10px;
             }
 
             .subtitle {
-                font-size: 0.85rem;
-                margin-bottom: 18px;
+                font-size: 1rem;
+                margin-bottom: 25px;
             }
 
             .links {
                 grid-template-columns: 1fr; /* одна колонка */
-                gap: 10px;
+                gap: 14px;
                 max-width: 100%;
             }
 
             .btn {
-                font-size: 0.95rem;
-                padding: 12px 10px;
-                min-height: 50px;
-                gap: 8px;
-                border-radius: 10px;
+                font-size: 1.15rem;
+                padding: 18px 14px;
+                min-height: 62px;
+                gap: 12px;
+                border-radius: 14px;
             }
 
             .btn span {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
 
             .footer {
-                margin-top: 20px;
-                font-size: 0.7rem;
+                margin-top: 28px;
+                font-size: 0.8rem;
             }
 
             .overlay-content {
-                padding: 25px 18px 20px;
+                padding: 30px 20px 25px;
                 max-width: 100%;
-                border-radius: 18px;
+                border-radius: 20px;
             }
 
             .overlay-content h2 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
             .overlay-content .subtitle-files,
             .overlay-content .subtitle-games,
             .overlay-content .subtitle-events {
-                font-size: 0.85rem;
-                margin-bottom: 16px;
+                font-size: 0.95rem;
+                margin-bottom: 18px;
             }
 
             .game-card {
-                padding: 12px 14px;
+                padding: 14px 16px;
             }
             .game-card .game-title {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             .file-btn {
-                font-size: 0.9rem;
-                padding: 10px 14px;
+                font-size: 1rem;
+                padding: 14px 16px;
+            }
+            .file-btn span {
+                font-size: 1.3rem;
             }
             .overlay-close {
-                font-size: 1.5rem;
-                top: 8px;
-                right: 12px;
+                font-size: 1.8rem;
+                top: 10px;
+                right: 14px;
+            }
+            .overlay-content .message-placeholder {
+                font-size: 1rem;
+                padding: 18px 0;
             }
         }
 
-        /* Для очень маленьких экранов (до 400px) */
-        @media (max-width: 400px) {
+        /* Очень маленькие экраны (до 420px) — чуть меньше, но всё ещё читаемо */
+        @media (max-width: 420px) {
             .logo {
-                font-size: 2.2rem;
-            }
-            .btn {
-                font-size: 0.85rem;
-                padding: 10px 8px;
-                min-height: 44px;
-            }
-            .btn span {
-                font-size: 1rem;
-            }
-            .subtitle {
-                font-size: 0.75rem;
-            }
-            .overlay-content {
-                padding: 20px 14px 16px;
-            }
-        }
-
-        /* Для больших экранов (ноутбук / десктоп) – можно оставить две колонки */
-        @media (min-width: 601px) and (max-width: 1024px) {
-            .links {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-                max-width: 560px;
+                font-size: 2.8rem;
+                letter-spacing: 2px;
             }
             .btn {
                 font-size: 1rem;
-                padding: 12px 10px;
+                padding: 14px 10px;
                 min-height: 54px;
             }
-        }
-
-        @media (min-width: 1025px) {
-            .links {
-                grid-template-columns: 1fr 1fr;
-                gap: 14px;
-                max-width: 600px;
+            .btn span {
+                font-size: 1.2rem;
             }
-            .btn {
-                font-size: 1.1rem;
-                padding: 14px 12px;
-                min-height: 58px;
+            .subtitle {
+                font-size: 0.85rem;
             }
-            .logo {
-                font-size: 4rem;
+            .overlay-content {
+                padding: 24px 14px 20px;
+            }
+            .overlay-content h2 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -555,7 +536,6 @@
             // Добавляйте новые игры сюда
         ];
 
-        // Рендеринг игр
         function renderGames() {
             const container = document.getElementById('gamesList');
             container.innerHTML = gamesData.map(item => `
@@ -607,7 +587,6 @@
             }
         });
 
-        // ===== ЗАПУСК =====
         renderGames();
     </script>
 </body>
