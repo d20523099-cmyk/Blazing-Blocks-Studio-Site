@@ -725,7 +725,7 @@
                 Ивенты
             </button>
 
-            <!-- ===== НОВАЯ КНОПКА ПОДПИСКИ ===== -->
+            <!-- ===== КНОПКА ПОДПИСКИ ===== -->
             <button class="btn" id="openSubscribeBtn">
                 <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
@@ -787,8 +787,11 @@
             <p class="subtitle-ov" style="color: #ffaa00; font-weight: bold;">
                 🎁 Первые 200 подписчиков получат эксклюзивные коды от игр и скидки!
             </p>
+            <!-- Блок для статуса подписки (добавлен для защиты) -->
+            <div id="subscribeStatus" style="display:none; padding:10px; border-radius:8px; margin-bottom:10px;"></div>
             <div class="subscribe-iframe-wrapper">
-                <iframe src="https://forms.msndr.net/subscriptions/f06ef320cd091013a30ac369fba6ac1f/form"></iframe>
+                <!-- Если iframe добавлен id для защиты -->
+                <iframe id="subscribeIframe" src="https://forms.msndr.net/subscriptions/f06ef320cd091013a30ac369fba6ac1f/form"></iframe>
             </div>
             <p style="color: #888; font-size: 0.8rem; margin-top: 12px;">
                 Никакого спама, только полезные новости о проектах студии.
@@ -1145,8 +1148,7 @@
         document.getElementById('openStatsBtn').addEventListener('click', () => openOverlay('statsOverlay'));
         document.getElementById('openFilesBtn').addEventListener('click', () => openOverlay('filesOverlay'));
         document.getElementById('openEventsBtn').addEventListener('click', () => openOverlay('eventsOverlay'));
-        // Кнопка подписки открывает специальный оверлей
-        document.getElementById('openSubscribeBtn').addEventListener('click', () => openOverlay('subscribeOverlay'));
+        // Кнопка подписки теперь обрабатывается в блоке защиты ниже
 
         document.querySelectorAll('.close-overlay-btn').forEach(btn => {
             btn.addEventListener('click', closeAllOverlays);
@@ -1165,6 +1167,111 @@
                 closeAllOverlays();
             }
         });
+
+        // ============================================================
+        // 🔐 ЗАЩИТА ОТ НАКРУТОК (IP + VPN + БЛОКИРОВКА)
+        // ============================================================
+        // Получить IP пользователя
+        function getIP() {
+            return fetch('https://api.ipify.org?format=json')
+                .then(r => r.json())
+                .then(d => d.ip)
+                .catch(() => null);
+        }
+
+        // Проверить, не использует ли пользователь VPN/прокси/хостинг
+        async function checkVPN(ip) {
+            if (!ip) return false;
+            try {
+                const response = await fetch(`http://ip-api.com/json/${ip}?fields=status,countryCode,isp,org`);
+                const data = await response.json();
+                if (data.status === 'success') {
+                    // Разрешённые страны (можно менять под себя)
+                    const allowedCountries = ['RU','BY','KZ','UA','AM','AZ','GE','MD','TJ','TM','UZ','KG'];
+                    if (!allowedCountries.includes(data.countryCode)) return true;
+                    // Ключевые слова для определения VPN/прокси/хостинга
+                    const keywords = ['vpn','proxy','hosting','cloud','server','dedicated','vps','aws','digitalocean','linode','vultr','hetzner','ovh'];
+                    const org = (data.org || '').toLowerCase();
+                    const isp = (data.isp || '').toLowerCase();
+                    if (keywords.some(k => org.includes(k) || isp.includes(k))) return true;
+                }
+                return false;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Основная проверка: IP + VPN + уже подписан?
+        async function checkIP() {
+            const ip = await getIP();
+            if (!ip) return { allowed: true, ip: null };
+            const blocked = JSON.parse(localStorage.getItem('blockedIPs') || '[]');
+            if (blocked.includes(ip)) {
+                return { allowed: false, reason: 'already_subscribed', ip };
+            }
+            const isVPN = await checkVPN(ip);
+            if (isVPN) {
+                return { allowed: false, reason: 'vpn_detected', ip };
+            }
+            return { allowed: true, ip };
+        }
+
+        // Заблокировать IP (сохранить в localStorage)
+        function blockIP(ip) {
+            if (ip) {
+                const blocked = JSON.parse(localStorage.getItem('blockedIPs') || '[]');
+                if (!blocked.includes(ip)) {
+                    blocked.push(ip);
+                    localStorage.setItem('blockedIPs', JSON.stringify(blocked));
+                }
+            }
+        }
+
+        // Обработчик кнопки "Подписаться"
+        document.getElementById('openSubscribeBtn').addEventListener('click', async function(e) {
+            e.preventDefault(); // предотвращаем возможное поведение по умолчанию
+            const result = await checkIP();
+            if (!result.allowed) {
+                if (result.reason === 'already_subscribed') {
+                    alert('✅ Вы уже подписаны на новости! Спасибо.');
+                } else if (result.reason === 'vpn_detected') {
+                    alert('⛔ Подписка с VPN/прокси запрещена. Отключите VPN и попробуйте снова.');
+                } else {
+                    alert('❌ Не удалось проверить IP. Попробуйте позже.');
+                }
+                return;
+            }
+            // Открываем оверлей подписки
+            openOverlay('subscribeOverlay');
+            // Сбрасываем статус подписки
+            const statusEl = document.getElementById('subscribeStatus');
+            if (statusEl) statusEl.style.display = 'none';
+            // Запоминаем IP для последующей блокировки после успешной подписки
+            window._currentIP = result.ip;
+        });
+
+        // Прослушиваем загрузку iframe, чтобы перехватить успешную подписку
+        const iframe = document.getElementById('subscribeIframe');
+        if (iframe) {
+            iframe.addEventListener('load', function() {
+                try {
+                    const url = iframe.contentWindow.location.href;
+                    if (url.includes('msndr.net') && url.includes('success')) {
+                        if (window._currentIP) blockIP(window._currentIP);
+                        const statusEl = document.getElementById('subscribeStatus');
+                        if (statusEl) {
+                            statusEl.style.display = 'block';
+                            statusEl.style.background = 'rgba(40,167,69,0.2)';
+                            statusEl.style.color = '#7ddf8a';
+                            statusEl.style.border = '1px solid #28a745';
+                            statusEl.textContent = '✅ Вы успешно подписались! Проверьте почту для подтверждения.';
+                        }
+                    }
+                } catch(e) {
+                    // если не удалось прочитать URL (CORS) – игнорируем
+                }
+            });
+        }
 
         // ============================================================
         // ЗАПУСК
