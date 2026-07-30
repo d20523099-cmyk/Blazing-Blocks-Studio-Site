@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" href="logo.png" />
     <title>Blazing Blocks Studio</title>
     <style>
-        /* ===== Все твои стили без изменений (я их скопирую из оригинального файла) ===== */
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
         :root {
             --bg: #0a0a0a;
             --accent: #ff6a00;
@@ -15,6 +15,7 @@
             --text-bright: #ffffff;
             --glass: rgba(20, 20, 20, 0.85);
         }
+
         * {
             margin: 0;
             padding: 0;
@@ -25,10 +26,13 @@
             user-select: none;
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
         }
-        html, body {
+
+        html,
+        body {
             height: 100%;
             overflow: hidden;
         }
+
         body {
             background: var(--bg);
             color: var(--text-bright);
@@ -40,6 +44,7 @@
             position: relative;
             overflow-x: hidden;
         }
+
         #starfieldCanvas {
             position: fixed;
             top: 0;
@@ -50,6 +55,8 @@
             pointer-events: none;
             display: block;
         }
+
+        /* ===== ГАРАЖ ===== */
         .garage-door {
             position: fixed;
             top: 0;
@@ -111,6 +118,7 @@
                 linear-gradient(135deg, #4a4a4a 0%, #2a2a2a 50%, #3a3a3a 100%);
             box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
         }
+
         .garage-door::before {
             content: '';
             position: absolute;
@@ -137,6 +145,7 @@
             background-size: 100% 100%;
             pointer-events: none;
         }
+
         .garage-door::after {
             content: '';
             position: absolute;
@@ -150,6 +159,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.2);
             pointer-events: none;
         }
+
         .garage-door .door-logo {
             position: relative;
             z-index: 2;
@@ -164,13 +174,17 @@
             animation: softGlow 2s ease-in-out infinite alternate;
             filter: drop-shadow(0 0 20px rgba(255, 106, 0, 0.6));
         }
+
         @keyframes softGlow {
             0% { filter: drop-shadow(0 0 8px rgba(255, 106, 0, 0.5)); }
             100% { filter: drop-shadow(0 0 25px rgba(255, 106, 0, 0.9)); }
         }
+
         .garage-door.open {
             transform: translateY(-100%);
         }
+
+        /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
         .container {
             width: 100%;
             max-width: 900px;
@@ -181,9 +195,11 @@
             opacity: 0;
             animation: fadeIn 0.8s ease 1.8s forwards;
         }
+
         @keyframes fadeIn {
             to { opacity: 1; }
         }
+
         .container.blurred .links,
         .container.blurred .footer {
             opacity: 0;
@@ -191,6 +207,7 @@
             pointer-events: none;
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
+
         .header-row {
             display: flex;
             align-items: center;
@@ -199,6 +216,7 @@
             margin-bottom: 15px;
             flex-wrap: wrap;
         }
+
         .logo {
             font-size: 5rem;
             font-weight: 900;
@@ -213,6 +231,7 @@
             animation: softGlow 2s ease-in-out infinite alternate;
             flex-shrink: 0;
         }
+
         #three-container {
             width: 180px;
             height: 180px;
@@ -223,6 +242,7 @@
             border: 1px solid rgba(255, 106, 0, 0.2);
             flex-shrink: 0;
         }
+
         .subtitle {
             font-size: 1.3rem;
             color: #aaaaaa;
@@ -232,6 +252,8 @@
             text-align: center;
             width: 100%;
         }
+
+        /* ===== КНОПКИ ===== */
         .links {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -240,6 +262,7 @@
             margin: 0 auto;
             width: 100%;
         }
+
         .btn {
             background: var(--glass);
             backdrop-filter: blur(8px);
@@ -263,6 +286,7 @@
             width: 100%;
             min-height: 70px;
         }
+
         .btn:hover {
             background: rgba(255, 106, 0, 0.2);
             border-color: var(--accent);
@@ -270,9 +294,11 @@
             transform: translateY(-3px);
             color: #fff;
         }
+
         .btn:active {
             transform: translateY(1px);
         }
+
         .btn svg {
             width: 28px;
             height: 28px;
@@ -280,15 +306,19 @@
             fill: #ffffff;
             transition: fill 0.3s;
         }
+
         .btn .roblox-icon rect { fill: #ffffff; }
         .btn .roblox-icon text { fill: #111111; }
         .btn:hover .roblox-icon rect { fill: #ffffff; }
         .btn:hover .roblox-icon text { fill: #111111; }
+
         .footer {
             margin-top: 40px;
             color: #666;
             font-size: 0.9rem;
         }
+
+        /* ===== ОВЕРЛЕИ ===== */
         .overlay {
             position: fixed;
             top: 0;
@@ -307,10 +337,12 @@
             pointer-events: none;
             transition: opacity 0.4s ease;
         }
+
         .overlay.active {
             opacity: 1;
             pointer-events: all;
         }
+
         .overlay-content {
             background: var(--glass);
             backdrop-filter: blur(12px);
@@ -329,10 +361,12 @@
             position: relative;
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
         }
+
         .overlay.active .overlay-content {
             transform: scale(1) translateY(0);
             opacity: 1;
         }
+
         .overlay-close {
             position: absolute;
             top: 14px;
@@ -345,10 +379,12 @@
             transition: color 0.2s ease, transform 0.2s ease;
             line-height: 1;
         }
+
         .overlay-close:hover {
             color: #fff;
             transform: rotate(90deg);
         }
+
         .overlay-content h2 {
             font-size: 2.2rem;
             margin-bottom: 8px;
@@ -358,11 +394,13 @@
             background-clip: text;
             font-weight: 700;
         }
+
         .overlay-content .subtitle-ov {
             color: #aaa;
             margin-bottom: 25px;
             font-size: 1.1rem;
         }
+
         .message-placeholder {
             color: #ccc;
             font-size: 1.2rem;
@@ -370,6 +408,7 @@
             border-top: 1px solid rgba(255,255,255,0.06);
             border-bottom: 1px solid rgba(255,255,255,0.06);
         }
+
         .progress-item {
             margin-bottom: 20px;
             text-align: left;
@@ -399,6 +438,7 @@
             border-radius: 20px;
             transition: width 1.2s ease;
         }
+
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -443,6 +483,7 @@
             background: rgba(255,106,0,0.2);
             border-color: var(--accent);
         }
+
         .file-btn {
             background: rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 106, 0, 0.4);
@@ -468,6 +509,7 @@
             box-shadow: 0 0 30px rgba(255, 106, 0, 0.4);
             transform: scale(1.02);
         }
+
         .overlay-content::-webkit-scrollbar {
             width: 5px;
         }
@@ -481,6 +523,8 @@
         .overlay-content::-webkit-scrollbar-thumb:hover {
             background: #999;
         }
+
+        /* ===== СТИЛИ ДЛЯ ПОДПИСКИ ===== */
         .subscribe-iframe-wrapper {
             width: 100%;
             border-radius: 12px;
@@ -494,6 +538,7 @@
             border: none;
             display: block;
         }
+
         @media (max-width: 768px) {
             .header-row { flex-direction: column; gap: 10px; }
             .logo { font-size: 4rem; letter-spacing: 4px; }
@@ -567,7 +612,7 @@
         <div class="overlay-content">
             <button class="overlay-close close-overlay-btn">✕</button>
             <h2>Подпишись на новости</h2>
-            <p class="subtitle-ov" style="color:#ffaa00;font-weight:bold;">🎁 Первые 200 подписчиков получат эксклюзивные коды от игр и скидки!</p>
+            <p class="subtitle-ov" style="color:#ffaa00;font-weight:bold;">🎁 Первые 200 подписчиков будут получать эксклюзивные коды от игр и скидки!</p>
             <div id="subscribeStatus" style="display:none;padding:10px;border-radius:8px;margin-bottom:10px;"></div>
             <div class="subscribe-iframe-wrapper">
                 <iframe id="subscribeIframe" src="https://forms.msndr.net/subscriptions/f06ef320cd091013a30ac369fba6ac1f/form"></iframe>
@@ -582,8 +627,11 @@
     <!-- ===== ПОДКЛЮЧАЕМ ОСНОВНОЙ СКРИПТ ===== -->
     <script src="main.js"></script>
 
-    <!-- ===== ПОДКЛЮЧАЕМ ЗАЩИТУ ===== -->
+    <!-- ===== ПОДКЛЮЧАЕМ ЗАЩИТУ ОТ VPN ===== -->
     <script src="protection.js"></script>
+
+    <!-- ===== ПОДКЛЮЧАЕМ ЗАЩИТУ ОТ КОНСОЛИ ===== -->
+    <script src="anti-debug.js"></script>
 
 </body>
 </html>
