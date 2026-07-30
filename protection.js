@@ -1,8 +1,8 @@
 // ============================================================
-// 🔐 ЗАЩИТА ОТ НАКРУТОК (IP + VPN + БЛОКИРОВКА)
+// 🔐 УСИЛЕННАЯ ЗАЩИТА (IP + VPN + прокси + хостинг)
 // ============================================================
 
-// Получить IP пользователя
+// Получить IP
 function getIP() {
     return fetch('https://api.ipify.org?format=json')
         .then(r => r.json())
@@ -10,38 +10,55 @@ function getIP() {
         .catch(() => null);
 }
 
-// Проверить, не использует ли пользователь VPN/прокси/хостинг
+// Проверка VPN/прокси/хостинга через ip-api.com с полями proxy и hosting
 async function checkVPN(ip) {
     if (!ip) return false;
     try {
-        const response = await fetch(`https://ip-api.com/json/${ip}?fields=status,countryCode,isp,org`);
+        // Запрашиваем поля: status, countryCode, isp, org, proxy, hosting
+        const response = await fetch(`https://ip-api.com/json/${ip}?fields=status,countryCode,isp,org,proxy,hosting`);
         const data = await response.json();
         if (data.status === 'success') {
+            // 1. Проверка страны: разрешены только страны СНГ и ближнего зарубежья
             const allowedCountries = ['RU','BY','KZ','UA','AM','AZ','GE','MD','TJ','TM','UZ','KG'];
             if (!allowedCountries.includes(data.countryCode)) {
+                console.warn('Страна не разрешена:', data.countryCode);
+                return true; // блокируем
+            }
+            // 2. Проверка прокси и хостинга (прямые флаги от ip-api)
+            if (data.proxy === true || data.hosting === true) {
+                console.warn('Обнаружен proxy или hosting');
                 return true;
             }
-            const keywords = ['vpn','proxy','hosting','cloud','server','dedicated','vps','aws','digitalocean','linode','vultr','hetzner','ovh'];
+            // 3. Проверка по ключевым словам в провайдере
+            const keywords = ['vpn','proxy','hosting','cloud','server','dedicated','vps','aws','digitalocean','linode','vultr','hetzner','ovh','m247','datacenter'];
             const org = (data.org || '').toLowerCase();
             const isp = (data.isp || '').toLowerCase();
             if (keywords.some(k => org.includes(k) || isp.includes(k))) {
+                console.warn('Обнаружен VPN/прокси по провайдеру');
                 return true;
             }
         }
         return false;
     } catch (e) {
         console.warn('Ошибка проверки VPN:', e);
+        // В случае ошибки разрешаем (чтобы не ломать)
         return false;
     }
 }
 
+// Основная проверка
 async function checkIP() {
     const ip = await getIP();
-    if (!ip) return { allowed: true, ip: null };
+    if (!ip) {
+        // Если IP не определён, разрешаем (но можно и блокировать)
+        return { allowed: true, ip: null };
+    }
+    // Проверяем, не подписывался ли уже этот IP
     const blocked = JSON.parse(localStorage.getItem('blockedIPs') || '[]');
     if (blocked.includes(ip)) {
         return { allowed: false, reason: 'already_subscribed', ip };
     }
+    // Проверяем VPN/прокси
     const isVPN = await checkVPN(ip);
     if (isVPN) {
         return { allowed: false, reason: 'vpn_detected', ip };
@@ -49,6 +66,7 @@ async function checkIP() {
     return { allowed: true, ip };
 }
 
+// Блокировка IP в localStorage
 function blockIP(ip) {
     if (ip) {
         const blocked = JSON.parse(localStorage.getItem('blockedIPs') || '[]');
@@ -59,6 +77,7 @@ function blockIP(ip) {
     }
 }
 
+// Обработчик кнопки подписки
 document.addEventListener('DOMContentLoaded', function() {
     const subscribeBtn = document.getElementById('openSubscribeBtn');
     if (subscribeBtn) {
@@ -69,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (result.reason === 'already_subscribed') {
                     alert('✅ Вы уже подписаны на новости! Спасибо.');
                 } else if (result.reason === 'vpn_detected') {
-                    alert('⛔ Подписка с VPN/прокси запрещена. Отключите VPN и попробуйте снова.');
+                    alert('⛔ Подписка с VPN/прокси или из неразрешённой страны запрещена. Отключите VPN и попробуйте снова.');
                 } else {
                     alert('❌ Не удалось проверить IP. Попробуйте позже.');
                 }
@@ -89,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Кнопка подписки не найдена');
     }
 
+    // Отслеживание успешной подписки через iframe
     const iframe = document.getElementById('subscribeIframe');
     if (iframe) {
         iframe.addEventListener('load', function() {
