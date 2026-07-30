@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" href="logo.png" />
     <title>Blazing Blocks Studio</title>
     <style>
-        /* ===== БАЗОВЫЕ СТИЛИ (в точности из вашего скрипта) ===== */
+        /* ===== БАЗОВЫЕ СТИЛИ ===== */
         :root {
             --bg: #0a0a0a;
             --accent: #ff6a00;
@@ -181,12 +181,8 @@
         }
 
         @keyframes softGlow {
-            0% {
-                filter: drop-shadow(0 0 8px rgba(255, 106, 0, 0.5));
-            }
-            100% {
-                filter: drop-shadow(0 0 25px rgba(255, 106, 0, 0.9));
-            }
+            0% { filter: drop-shadow(0 0 8px rgba(255, 106, 0, 0.5)); }
+            100% { filter: drop-shadow(0 0 25px rgba(255, 106, 0, 0.9)); }
         }
 
         .garage-door.open {
@@ -210,9 +206,7 @@
         }
 
         @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
+            to { opacity: 1; }
         }
 
         .container.blurred .links,
@@ -220,11 +214,6 @@
             opacity: 0;
             transform: translateY(20px);
             pointer-events: none;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        .container .links,
-        .container .footer {
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
@@ -273,7 +262,7 @@
             width: 100%;
         }
 
-        /* ===== КНОПКИ (стиль из вашего скрипта + иконки) ===== */
+        /* ===== КНОПКИ ===== */
         .links {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -319,7 +308,6 @@
             transform: translateY(1px);
         }
 
-        /* Иконки внутри кнопок (белые, не меняются при наведении) */
         .btn svg {
             width: 28px;
             height: 28px;
@@ -328,20 +316,10 @@
             transition: fill 0.3s;
         }
 
-        /* Для Roblox иконка — специальная, чтобы сохранить узнаваемость */
-        .btn .roblox-icon rect {
-            fill: #ffffff;
-        }
-        .btn .roblox-icon text {
-            fill: #111111;
-        }
-        /* При наведении иконка Roblox не меняется */
-        .btn:hover .roblox-icon rect {
-            fill: #ffffff;
-        }
-        .btn:hover .roblox-icon text {
-            fill: #111111;
-        }
+        .btn .roblox-icon rect { fill: #ffffff; }
+        .btn .roblox-icon text { fill: #111111; }
+        .btn:hover .roblox-icon rect { fill: #ffffff; }
+        .btn:hover .roblox-icon text { fill: #111111; }
 
         .footer {
             margin-top: 40px;
@@ -349,7 +327,7 @@
             font-size: 0.9rem;
         }
 
-        /* ===== ОВЕРЛЕИ (без изменений) ===== */
+        /* ===== ОВЕРЛЕИ ===== */
         .overlay {
             position: fixed;
             top: 0;
@@ -555,6 +533,21 @@
             background: #999;
         }
 
+        /* Стили для iframe формы подписки */
+        .subscribe-iframe-wrapper {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(0,0,0,0.3);
+            margin-top: 10px;
+        }
+        .subscribe-iframe-wrapper iframe {
+            width: 100%;
+            height: 380px;
+            border: none;
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .header-row {
                 flex-direction: column;
@@ -618,6 +611,9 @@
                 height: 12px;
                 bottom: 8%;
             }
+            .subscribe-iframe-wrapper iframe {
+                height: 340px;
+            }
         }
 
         @media (max-width: 420px) {
@@ -636,6 +632,9 @@
                 width: 25px;
                 height: 10px;
                 bottom: 5%;
+            }
+            .subscribe-iframe-wrapper iframe {
+                height: 300px;
             }
         }
     </style>
@@ -678,7 +677,7 @@
                 TikTok
             </a>
 
-            <!-- Roblox (исправленная иконка) -->
+            <!-- Roblox -->
             <a href="https://www.roblox.com/share/g/725905566" target="_blank" class="btn">
                 <svg class="roblox-icon" viewBox="0 0 24 24">
                     <rect x="3" y="3" width="18" height="18" rx="4" />
@@ -705,7 +704,7 @@
                 Donation
             </a>
 
-            <!-- Внутренние кнопки (без внешних ссылок) -->
+            <!-- Внутренние кнопки -->
             <button class="btn" id="openProgressBtn">
                 <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
                 Прогресс
@@ -724,6 +723,14 @@
             <button class="btn" id="openEventsBtn">
                 <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
                 Ивенты
+            </button>
+
+            <!-- ===== НОВАЯ КНОПКА ПОДПИСКИ ===== -->
+            <button class="btn" id="openSubscribeBtn">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                Подписаться
             </button>
         </div>
 
@@ -769,6 +776,23 @@
             <h2>Ивенты</h2>
             <p class="subtitle-ov">Ближайшие мероприятия студии</p>
             <div class="message-placeholder">Пока ивентов нет. Загляните позже!</div>
+        </div>
+    </div>
+
+    <!-- ===== ОВЕРЛЕЙ ДЛЯ ПОДПИСКИ ===== -->
+    <div class="overlay" id="subscribeOverlay">
+        <div class="overlay-content">
+            <button class="overlay-close close-overlay-btn">✕</button>
+            <h2>Подпишись на новости</h2>
+            <p class="subtitle-ov" style="color: #ffaa00; font-weight: bold;">
+                🎁 Первые 200 подписчиков получат эксклюзивные коды от игр и скидки!
+            </p>
+            <div class="subscribe-iframe-wrapper">
+                <iframe src="https://forms.msndr.net/subscriptions/f06ef320cd091013a30ac369fba6ac1f/form"></iframe>
+            </div>
+            <p style="color: #888; font-size: 0.8rem; margin-top: 12px;">
+                Никакого спама, только полезные новости о проектах студии.
+            </p>
         </div>
     </div>
 
@@ -1121,6 +1145,8 @@
         document.getElementById('openStatsBtn').addEventListener('click', () => openOverlay('statsOverlay'));
         document.getElementById('openFilesBtn').addEventListener('click', () => openOverlay('filesOverlay'));
         document.getElementById('openEventsBtn').addEventListener('click', () => openOverlay('eventsOverlay'));
+        // Кнопка подписки открывает специальный оверлей
+        document.getElementById('openSubscribeBtn').addEventListener('click', () => openOverlay('subscribeOverlay'));
 
         document.querySelectorAll('.close-overlay-btn').forEach(btn => {
             btn.addEventListener('click', closeAllOverlays);
