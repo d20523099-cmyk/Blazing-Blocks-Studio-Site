@@ -1,5 +1,5 @@
 /* ============================================================
-   🎨 ОСНОВНЫЕ СТИЛИ (Blazing Blocks Studio) – ИСПРАВЛЕННЫЙ
+   🎨 ОСНОВНЫЕ СТИЛИ (Blazing Blocks Studio) – БЕЗ КУРСОРА
    ============================================================ */
 
 :root {
@@ -21,7 +21,8 @@ html,
 body {
     height: 100%;
     overflow: hidden;
-    cursor: none;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -31,45 +32,9 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 20px;
+    padding: 16px;
     position: relative;
     overflow: hidden;
-}
-
-/* ===== КАСТОМНЫЙ КУРСОР ===== */
-#custom-cursor {
-    position: fixed;
-    pointer-events: none;
-    z-index: 99999;
-    width: 28px;
-    height: 28px;
-    border: 2px solid #ff6a00;
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(255, 106, 0, 0.7), 0 0 40px rgba(255, 68, 0, 0.4);
-    transform: translate(-50%, -50%);
-    transition: width 0.15s, height 0.15s, box-shadow 0.15s;
-    will-change: transform;
-    mix-blend-mode: screen;
-}
-
-#custom-cursor::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 4px;
-    height: 4px;
-    background: #ffaa00;
-    border-radius: 50%;
-    box-shadow: 0 0 12px #ffaa00;
-}
-
-#custom-cursor.hover {
-    width: 40px;
-    height: 40px;
-    border-color: #ffaa00;
-    box-shadow: 0 0 40px rgba(255, 106, 0, 1), 0 0 80px rgba(255, 68, 0, 0.6);
 }
 
 /* ===== ЗВЁЗДЫ ===== */
@@ -83,7 +48,7 @@ body {
     pointer-events: none;
 }
 
-/* ===== ГАРАЖ (С РУЧКОЙ) ===== */
+/* ===== ГАРАЖ ===== */
 .garage-door {
     position: fixed;
     top: 0;
@@ -127,7 +92,7 @@ body {
 .garage-door .door-logo {
     position: relative;
     z-index: 2;
-    font-size: clamp(3rem, 8vw, 5rem);
+    font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 900;
     letter-spacing: 6px;
     text-transform: uppercase;
@@ -179,14 +144,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
-    margin-bottom: 20px;
+    gap: 30px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
     width: 100%;
 }
 
 .logo {
-    font-size: clamp(3.5rem, 10vw, 5.5rem);
+    font-size: clamp(3rem, 10vw, 5.5rem);
     font-weight: 900;
     letter-spacing: 4px;
     line-height: 1.1;
@@ -202,8 +167,8 @@ body {
 }
 
 #three-container {
-    width: clamp(150px, 25vw, 180px);
-    height: clamp(150px, 25vw, 180px);
+    width: clamp(130px, 20vw, 170px);
+    height: clamp(130px, 20vw, 170px);
     border-radius: 20px;
     overflow: hidden;
     background: rgba(0, 0, 0, 0.4);
@@ -213,9 +178,9 @@ body {
 }
 
 .subtitle {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
     color: #aaaaaa;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     letter-spacing: 1.5px;
     font-weight: 300;
     text-align: center;
@@ -239,9 +204,9 @@ body {
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 106, 0, 0.35);
     color: var(--text-bright);
-    padding: 18px 14px;
-    border-radius: 16px;
-    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    padding: 16px 14px;
+    border-radius: 14px;
+    font-size: clamp(1rem, 2vw, 1.3rem);
     font-weight: 600;
     letter-spacing: 0.5px;
     text-decoration: none;
@@ -249,12 +214,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     box-shadow: 0 0 15px rgba(255, 106, 0, 0.1);
-    cursor: none;
     font-family: inherit;
     width: 100%;
-    min-height: 64px;
+    min-height: 60px;
 }
 
 .btn:hover {
@@ -270,8 +234,8 @@ body {
 }
 
 .btn svg {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     flex-shrink: 0;
     fill: #ffffff;
 }
@@ -293,9 +257,9 @@ body {
 }
 
 .footer {
-    margin-top: 20px;
+    margin-top: 18px;
     color: #666;
-    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-size: clamp(0.7rem, 1.5vw, 0.95rem);
 }
 
 /* ===== ОВЕРЛЕИ ===== */
@@ -316,7 +280,6 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease;
-    cursor: none;
 }
 
 .overlay.active {
@@ -330,7 +293,7 @@ body {
     -webkit-backdrop-filter: blur(12px);
     border-radius: 24px;
     border: 1px solid rgba(255, 106, 0, 0.35);
-    padding: 32px 28px 28px;
+    padding: 28px 24px 24px;
     max-width: 600px;
     width: 100%;
     max-height: 80vh;
@@ -349,12 +312,12 @@ body {
 
 .overlay-close {
     position: absolute;
-    top: 14px;
-    right: 18px;
+    top: 12px;
+    right: 16px;
     background: none;
     border: none;
     color: #aaa;
-    font-size: 2.2rem;
+    font-size: 2rem;
     cursor: pointer;
     transition: color 0.2s ease, transform 0.2s ease;
     line-height: 1;
@@ -366,8 +329,8 @@ body {
 }
 
 .overlay-content h2 {
-    font-size: clamp(1.8rem, 4vw, 2.2rem);
-    margin-bottom: 6px;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    margin-bottom: 4px;
     background: linear-gradient(90deg, #ffaa00, #ff6a00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -377,19 +340,19 @@ body {
 
 .overlay-content .subtitle-ov {
     color: #aaa;
-    margin-bottom: 18px;
-    font-size: clamp(1rem, 2vw, 1.1rem);
+    margin-bottom: 16px;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
 
 .progress-item {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     text-align: left;
 }
 
 .progress-item .label {
     display: flex;
     justify-content: space-between;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     margin-bottom: 4px;
 }
@@ -401,7 +364,7 @@ body {
 
 .progress-track {
     width: 100%;
-    height: 12px;
+    height: 10px;
     background: rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     overflow: hidden;
@@ -418,14 +381,14 @@ body {
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-    margin: 18px 0;
+    gap: 14px;
+    margin: 16px 0;
 }
 
 .stat-card {
     background: rgba(0, 0, 0, 0.4);
     border-radius: 14px;
-    padding: 16px 10px;
+    padding: 14px 8px;
     border: 1px solid rgba(255, 106, 0, 0.2);
     transition: transform 0.3s ease;
 }
@@ -435,7 +398,7 @@ body {
 }
 
 .stat-number {
-    font-size: clamp(2rem, 4.5vw, 2.6rem);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 900;
     background: linear-gradient(135deg, #ffaa00, #ff6a00);
     -webkit-background-clip: text;
@@ -444,19 +407,19 @@ body {
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #aaa;
     margin-top: 4px;
 }
 
 .stat-link {
     display: inline-block;
-    margin-top: 8px;
+    margin-top: 6px;
     color: #ffaa00;
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     border: 1px solid rgba(255, 106, 0, 0.3);
-    padding: 4px 14px;
+    padding: 4px 12px;
     border-radius: 20px;
     transition: all 0.3s;
 }
@@ -470,17 +433,17 @@ body {
     background: rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 106, 0, 0.4);
     color: #fff;
-    padding: 16px 20px;
-    border-radius: 14px;
-    font-size: 1.1rem;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 1rem;
     font-weight: 500;
     text-decoration: none;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 14px;
-    cursor: none;
+    gap: 12px;
+    cursor: pointer;
     width: 100%;
     background: rgba(255, 106, 0, 0.08);
     font-family: inherit;
@@ -503,7 +466,7 @@ body {
 
 .subscribe-iframe-wrapper iframe {
     width: 100%;
-    height: 380px;
+    height: 360px;
     border: none;
     display: block;
 }
@@ -518,39 +481,43 @@ body {
 
 /* ===== АДАПТИВ ===== */
 
-/* Планшеты */
+/* Планшеты и небольшие экраны */
 @media (max-width: 1024px) {
     .header-row {
-        gap: 30px;
+        gap: 24px;
     }
     .links {
         grid-template-columns: 1fr 1fr;
-        gap: 14px;
+        gap: 12px;
         max-width: 600px;
     }
     .btn {
-        padding: 16px 12px;
-        min-height: 58px;
+        padding: 14px 12px;
+        min-height: 56px;
         font-size: clamp(0.95rem, 2vw, 1.1rem);
     }
     #three-container {
-        width: 150px;
-        height: 150px;
+        width: 140px;
+        height: 140px;
     }
     .logo {
-        font-size: clamp(3rem, 9vw, 4.5rem);
+        font-size: clamp(2.8rem, 9vw, 4.5rem);
     }
     .garage-door::after {
         width: 50px;
         height: 18px;
         bottom: 12%;
     }
+    .subtitle {
+        font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+    }
 }
 
-/* Телефоны */
+/* Телефоны (ширина до 768px) */
 @media (max-width: 768px) {
     .header-row {
-        gap: 16px;
+        gap: 12px;
+        margin-bottom: 12px;
     }
     .links {
         grid-template-columns: 1fr 1fr;
@@ -558,50 +525,57 @@ body {
         max-width: 480px;
     }
     .btn {
-        padding: 14px 10px;
-        min-height: 50px;
-        font-size: clamp(0.85rem, 2.5vw, 1rem);
+        padding: 12px 8px;
+        min-height: 48px;
+        font-size: clamp(0.85rem, 2.2vw, 0.95rem);
         border-radius: 12px;
+        gap: 8px;
     }
     .btn svg {
-        width: 22px;
-        height: 22px;
+        width: 20px;
+        height: 20px;
     }
     .subtitle {
-        font-size: clamp(0.9rem, 2.8vw, 1.1rem);
-        margin-bottom: 16px;
+        font-size: clamp(0.85rem, 2.5vw, 1rem);
+        margin-bottom: 14px;
     }
     #three-container {
-        width: 120px;
-        height: 120px;
+        width: 110px;
+        height: 110px;
     }
     .logo {
-        font-size: clamp(2.5rem, 8vw, 3.5rem);
+        font-size: clamp(2.2rem, 7vw, 3.2rem);
     }
     .stats-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        gap: 10px;
     }
     .overlay-content {
-        padding: 20px 16px;
+        padding: 18px 16px;
     }
     .subscribe-iframe-wrapper iframe {
-        height: 300px;
+        height: 280px;
     }
     .footer {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
+        margin-top: 14px;
     }
     .garage-door::after {
         width: 40px;
         height: 15px;
         bottom: 10%;
     }
+    .garage-door .door-logo {
+        font-size: clamp(1.8rem, 6vw, 3rem);
+        letter-spacing: 3px;
+    }
 }
 
-/* Маленькие телефоны */
+/* Маленькие телефоны (до 480px) */
 @media (max-width: 480px) {
     .header-row {
-        gap: 10px;
+        gap: 8px;
+        margin-bottom: 8px;
     }
     .links {
         grid-template-columns: 1fr;
@@ -609,37 +583,45 @@ body {
         max-width: 320px;
     }
     .btn {
-        padding: 12px 8px;
-        min-height: 44px;
-        font-size: 0.85rem;
+        padding: 10px 6px;
+        min-height: 42px;
+        font-size: 0.8rem;
         border-radius: 10px;
+        gap: 6px;
     }
     .btn svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
     }
     .subtitle {
-        font-size: 0.85rem;
-        margin-bottom: 12px;
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+        padding: 0 5px;
     }
     #three-container {
-        width: 90px;
-        height: 90px;
+        width: 80px;
+        height: 80px;
     }
     .logo {
-        font-size: 2rem;
-        letter-spacing: 2px;
+        font-size: 1.8rem;
+        letter-spacing: 1px;
     }
     .stats-grid {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 8px;
+    }
+    .stat-number {
+        font-size: 1.6rem;
+    }
+    .stat-label {
+        font-size: 0.75rem;
     }
     .footer {
-        margin-top: 12px;
-        font-size: 0.7rem;
+        font-size: 0.65rem;
+        margin-top: 10px;
     }
     .garage-door .door-logo {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         letter-spacing: 2px;
     }
     .garage-door::after {
@@ -648,21 +630,26 @@ body {
         bottom: 8%;
     }
     .overlay-content {
-        padding: 16px 12px;
+        padding: 14px 10px;
     }
     .subscribe-iframe-wrapper iframe {
-        height: 260px;
+        height: 240px;
     }
-    .stat-number {
-        font-size: 1.8rem;
+    .overlay-content h2 {
+        font-size: 1.2rem;
+    }
+    .progress-item .label {
+        font-size: 0.8rem;
+    }
+    .file-btn {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+        min-height: 40px;
     }
 }
 
-/* Отключаем кастомный курсор на touch */
+/* Отключаем кастомный курсор на touch (если он есть, но мы его убрали, так что просто на всякий случай) */
 @media (hover: none) and (pointer: coarse) {
-    #custom-cursor {
-        display: none !important;
-    }
     * {
         cursor: auto !important;
     }
