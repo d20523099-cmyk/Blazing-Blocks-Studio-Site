@@ -1,5 +1,5 @@
 /* ============================================================
-   🎨 ОСНОВНЫЕ СТИЛИ (Blazing Blocks Studio) – БЕЗ КУРСОРА
+   🎨 ОСНОВНЫЕ СТИЛИ (Blazing Blocks Studio) – ФИНАЛ
    ============================================================ */
 
 :root {
@@ -15,12 +15,13 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    cursor: auto !important; /* стандартный курсор */
 }
 
 html,
 body {
     height: 100%;
-    overflow: hidden;
+    overflow: hidden !important; /* убираем скролл */
     margin: 0;
     padding: 0;
 }
@@ -34,7 +35,12 @@ body {
     text-align: center;
     padding: 16px;
     position: relative;
-    overflow: hidden;
+    overflow: hidden !important;
+}
+
+/* ===== СКРЫВАЕМ КАСТОМНЫЙ КУРСОР (если он есть) ===== */
+#custom-cursor {
+    display: none !important;
 }
 
 /* ===== ЗВЁЗДЫ ===== */
@@ -131,7 +137,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 10px 0;
+    padding: 8px 0;
+    overflow: hidden !important;
 }
 
 @keyframes fadeIn {
@@ -144,8 +151,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
-    margin-bottom: 16px;
+    gap: 24px;
+    margin-bottom: 12px;
     flex-wrap: wrap;
     width: 100%;
 }
@@ -180,7 +187,7 @@ body {
 .subtitle {
     font-size: clamp(1rem, 2.5vw, 1.4rem);
     color: #aaaaaa;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     letter-spacing: 1.5px;
     font-weight: 300;
     text-align: center;
@@ -191,7 +198,7 @@ body {
 .links {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 14px;
     max-width: 750px;
     margin: 0 auto;
     width: 100%;
@@ -204,7 +211,7 @@ body {
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 106, 0, 0.35);
     color: var(--text-bright);
-    padding: 16px 14px;
+    padding: 16px 12px;
     border-radius: 14px;
     font-size: clamp(1rem, 2vw, 1.3rem);
     font-weight: 600;
@@ -218,7 +225,8 @@ body {
     box-shadow: 0 0 15px rgba(255, 106, 0, 0.1);
     font-family: inherit;
     width: 100%;
-    min-height: 60px;
+    min-height: 58px;
+    cursor: pointer !important;
 }
 
 .btn:hover {
@@ -257,7 +265,7 @@ body {
 }
 
 .footer {
-    margin-top: 18px;
+    margin-top: 14px;
     color: #666;
     font-size: clamp(0.7rem, 1.5vw, 0.95rem);
 }
@@ -318,7 +326,7 @@ body {
     border: none;
     color: #aaa;
     font-size: 2rem;
-    cursor: pointer;
+    cursor: pointer !important;
     transition: color 0.2s ease, transform 0.2s ease;
     line-height: 1;
 }
@@ -381,7 +389,7 @@ body {
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 14px;
+    gap: 12px;
     margin: 16px 0;
 }
 
@@ -443,7 +451,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    cursor: pointer;
+    cursor: pointer !important;
     width: 100%;
     background: rgba(255, 106, 0, 0.08);
     font-family: inherit;
@@ -484,17 +492,16 @@ body {
 /* Планшеты и небольшие экраны */
 @media (max-width: 1024px) {
     .header-row {
-        gap: 24px;
+        gap: 20px;
     }
     .links {
-        grid-template-columns: 1fr 1fr;
         gap: 12px;
         max-width: 600px;
     }
     .btn {
-        padding: 14px 12px;
-        min-height: 56px;
-        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        padding: 14px 10px;
+        min-height: 54px;
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
     }
     #three-container {
         width: 140px;
@@ -509,7 +516,8 @@ body {
         bottom: 12%;
     }
     .subtitle {
-        font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+        margin-bottom: 14px;
     }
 }
 
@@ -517,7 +525,7 @@ body {
 @media (max-width: 768px) {
     .header-row {
         gap: 12px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
     .links {
         grid-template-columns: 1fr 1fr;
@@ -526,8 +534,8 @@ body {
     }
     .btn {
         padding: 12px 8px;
-        min-height: 48px;
-        font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+        min-height: 46px;
+        font-size: clamp(0.8rem, 2.2vw, 0.95rem);
         border-radius: 12px;
         gap: 8px;
     }
@@ -536,8 +544,8 @@ body {
         height: 20px;
     }
     .subtitle {
-        font-size: clamp(0.85rem, 2.5vw, 1rem);
-        margin-bottom: 14px;
+        font-size: clamp(0.8rem, 2.5vw, 1rem);
+        margin-bottom: 12px;
     }
     #three-container {
         width: 110px;
@@ -558,7 +566,7 @@ body {
     }
     .footer {
         font-size: 0.75rem;
-        margin-top: 14px;
+        margin-top: 12px;
     }
     .garage-door::after {
         width: 40px;
@@ -575,7 +583,7 @@ body {
 @media (max-width: 480px) {
     .header-row {
         gap: 8px;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
     .links {
         grid-template-columns: 1fr;
@@ -584,7 +592,7 @@ body {
     }
     .btn {
         padding: 10px 6px;
-        min-height: 42px;
+        min-height: 40px;
         font-size: 0.8rem;
         border-radius: 10px;
         gap: 6px;
@@ -594,8 +602,8 @@ body {
         height: 18px;
     }
     .subtitle {
-        font-size: 0.8rem;
-        margin-bottom: 10px;
+        font-size: 0.75rem;
+        margin-bottom: 8px;
         padding: 0 5px;
     }
     #three-container {
@@ -618,7 +626,7 @@ body {
     }
     .footer {
         font-size: 0.65rem;
-        margin-top: 10px;
+        margin-top: 8px;
     }
     .garage-door .door-logo {
         font-size: 1.5rem;
@@ -644,13 +652,6 @@ body {
     .file-btn {
         padding: 10px 12px;
         font-size: 0.85rem;
-        min-height: 40px;
-    }
-}
-
-/* Отключаем кастомный курсор на touch (если он есть, но мы его убрали, так что просто на всякий случай) */
-@media (hover: none) and (pointer: coarse) {
-    * {
-        cursor: auto !important;
+        min-height: 38px;
     }
 }
